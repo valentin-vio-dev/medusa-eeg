@@ -1,24 +1,26 @@
 import { Injectable } from '@angular/core';
 import Device from 'src/app/models/Device';
-import { Plugins } from "@capacitor/core";
+import { PluginListenerHandle, Plugins } from "@capacitor/core";
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeviceService {
   devices: Device[] = [];
+  scannerListener: any;
 
-  constructor() {
-    this.addDevices([new Device("EPOC+ (A5FGRE)", "XE:36:S2:37"), new Device("EPOC+ (X4G582)", "12:RV:4V:F4")]);
-  }
+  constructor() { }
 
   scan(time: number) {
     this.clearDevices();
+
+    this.scannerListener = Plugins.EEGBridge.addListener('device_scan_result', (result: any) => {
+      this.devices.push(new Device(result.name, result.address));
+    });
+
     Plugins.EEGBridge.scan({time}).then(() => {
-      Plugins.EEGBridge.addListener("scanResult", (result: any) => {
-        let device = new Device(result.name, result.address);
-        this.devices.push(device);
-      });
+      this.scannerListener.remove();
     }).catch(() => {
       console.log('EEGBridge error');
     });
@@ -28,12 +30,4 @@ export class DeviceService {
     this.devices = [];
   }
 
-  addDevices(devs) {
-    setTimeout(() => {
-      this.devices.push(devs.shift());
-      if (devs.length > 0) {
-        this.addDevices(devs);
-      }
-    }, 1000);
-  }
 }

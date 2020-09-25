@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import Device from 'src/app/models/Device';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { firestore } from 'firebase';
 
 @Component({
   selector: 'app-device-item',
@@ -11,16 +13,21 @@ import Device from 'src/app/models/Device';
 export class DeviceItemComponent implements OnInit {
   @Input() device: Device;
 
-  constructor(public alertController: AlertController) { }
+  constructor(public alertController: AlertController, private fireStore: AngularFirestore) { }
 
   ngOnInit() {}
 
   connect() {
-    this.device.connect().then(() => {
-
-    }).catch((err) => {
-      this.connectionFailed(err);
-    });
+    if (!this.device.connected) {
+      this.device.connect().then(() => {
+        this.device.addEEGDataListener(this.fireStore);
+      }).catch((err) => {
+        this.connectionFailed(err);
+      });
+    } else {
+      this.device.disconnect();
+    }
+    
   }
 
   async connectionFailed(text: string) {

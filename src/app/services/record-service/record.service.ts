@@ -6,13 +6,8 @@ import Record from 'src/app/models/Record';
   providedIn: 'root'
 })
 export class RecordService {
-  record: Record = new Record();
-  cloudSaveEnabled: boolean = false;
 
-  constructor(private fireStore: AngularFirestore) { }
+  constructor() { }
 
-  saveRecord() {
-    if (!this.cloudSaveEnabled) return;
-    this.record.saveToFirestore(this.fireStore);
-  }
+  
 }

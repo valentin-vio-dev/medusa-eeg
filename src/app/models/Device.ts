@@ -1,9 +1,18 @@
 import { Plugins } from "@capacitor/core";
+import Record from './Record';
+import Signal from './Signal';
+
+import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
 
 export default class Device {
     name: string;
     address: string;
     connected: boolean;
+
+    eegDataListener: any;
+    firestore: AngularFirestore;
+
+    firestoreDocRef: DocumentReference;
 
     constructor(name: string, address: string) {
         this.name = name;
@@ -13,7 +22,7 @@ export default class Device {
 
     connect() {
         return new Promise(async (resolve, reject) => {
-            await Plugins.EEGBridge.connect({name}).then(() => {
+            await Plugins.EEGBridge.connect({device_address: this.address}).then(() => {
                 this.connected = true;
                 resolve();
             }).catch((err) => {
@@ -24,6 +33,35 @@ export default class Device {
     }
 
     disconnect() {
-        return Plugins.EEGBridge.disconnect();
+        if (this.eegDataListener != null) {
+            this.removeEEGDataListener();
+        }
+        return Plugins.EEGBridge.disconnect({device_address: this.address});
+    }
+
+    async addEEGDataListener(firestore: AngularFirestore) {
+        this.firestoreDocRef = await firestore.collection('records').add({
+            device: { 
+                name: this.name,
+                address: this.address
+            }
+        });
+        
+        this.eegDataListener = Plugins.EEGBridge.addListener('eeg_data', (res: any) => {
+            this.firestoreDocRef.collection('signals').add({
+                time: Date.now(),
+                data: this.arrayFromString(res.data)
+            });
+        });
+    }
+
+    removeEEGDataListener() {
+        this.eegDataListener.remove();
+    }
+
+    arrayFromString(arr: string) {
+        return arr.split(',').map((value) => {
+            return parseFloat(value);
+        });
     }
 }

@@ -6,6 +6,8 @@ export default class Record {
     start: number;
     end: number;
 
+    recordDocumentRef: DocumentReference;
+
     constructor() {
         this.signals = [];
         this.start = Date.now();
@@ -17,13 +19,12 @@ export default class Record {
 
     async saveToFirestore(fireStore: AngularFirestore) {
         this.end = Date.now();
-        let recordDocumentRef: DocumentReference = await fireStore.collection('records').add({
-            start: this.start,
-            end: this.end
+        this.recordDocumentRef = await fireStore.collection('records').add({
+            start: this.start
         });
 
         this.signals.forEach(signal => {
-            recordDocumentRef.collection('signals').add({
+            this.recordDocumentRef.collection('signals').add({
                 time: signal.time,
                 eeg: this.prepareArray(signal.eeg),
                 eegConverted: this.prepareArray(signal.eegConverted),
