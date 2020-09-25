@@ -1,0 +1,7 @@
+{
+  "name": "medusa-eeg",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,9 @@
+<ng-container *ngFor="let device of deviceService.devices">
+  <app-device-item [device]="device"></app-device-item>
+</ng-container>
+
+<ion-item lines="none" *ngIf="!scanning">
+  <ion-label class="ion-text-right">
+    <small>Found {{ deviceService.devices.length + (deviceService.devices.length > 1 ? ' devices' : ' device')}}.</small>
+  </ion-label>
+</ion-item>

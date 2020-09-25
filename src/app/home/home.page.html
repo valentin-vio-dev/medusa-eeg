@@ -1,0 +1,22 @@
+<ion-header [translucent]="true" class="ion-no-border" >
+  <ion-toolbar>
+    <ion-title>
+      <b class="primary-text">SCAN</b><b>DEVICES</b>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <app-device-list [scanning]="scanning"></app-device-list>
+</ion-content>
+
+<ion-footer class="ion-no-border ion-padding">
+  <ion-toolbar>
+    <ion-button slot="secondary" class="dark" (click)="scanTimeSettings()">
+      <ion-icon name="settings"></ion-icon>
+    </ion-button>
+    <ion-button expand="block" (click)="scan()" [class]="scanning ? 'disabled' : ''">
+      {{ scanning ? 'Scanning...' : 'Scan' }}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
