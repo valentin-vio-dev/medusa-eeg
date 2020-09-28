@@ -1,4 +1,9 @@
 canvas {
-    border: 1px dashed #CCCCCC;
+    border: 1px dashed #5f45cf;
     background-color: #FAFAFA;
+
+    &.disabled {
+        border: 1px dashed #CCCCCC;
+        background-color: #FAFAFA;
+    }
 }

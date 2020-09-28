@@ -17,6 +17,7 @@ export class MedusaChartComponent implements OnInit {
   points: number[] = [];
   cells: any = {rx: 0, ry: 0};
   resolution: number = 1;
+  updateEnabled: boolean = true;
 
   constructor() { }
 
@@ -37,32 +38,36 @@ export class MedusaChartComponent implements OnInit {
 
   draw() {
     if (this.points.length <= 1) return;
-    this.clearRegion();
 
-    let p1 = this.points[this.chartCursorIndex] * this.resolution;
-    let p2 = this.points[this.chartCursorIndex + 1] * this.resolution;
+    if (this.updateEnabled) {
+      this.clearRegion();
 
-    this.ctx.beginPath();
-    this.ctx.moveTo(this.chartCursorIndex * this.cells.rx, this.point(p1));
+      let p1 = this.points[this.chartCursorIndex] * this.resolution;
+      let p2 = this.points[this.chartCursorIndex + 1] * this.resolution;
 
-    this.chartCursorIndex += 1;
-    
-    this.ctx.lineTo(this.chartCursorIndex * this.cells.rx, this.point(p2));
-    this.ctx.lineWidth = 1;
-    this.ctx.strokeStyle = "#5f45cf";
-    this.ctx.stroke();
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.chartCursorIndex * this.cells.rx, this.point(p1));
 
-    this.ctx.beginPath();
-    this.ctx.moveTo(this.chartCursorIndex * this.cells.rx+1, 0);
-    this.ctx.lineTo(this.chartCursorIndex * this.cells.rx+1, this.canvas.nativeElement.height);
-    this.ctx.strokeStyle = "#ff0000";
-    this.ctx.stroke();
+      this.chartCursorIndex += 1;
+      
+      this.ctx.lineTo(this.chartCursorIndex * this.cells.rx, this.point(p2));
+      this.ctx.lineWidth = 1;
+      this.ctx.strokeStyle = "#5f45cf";
+      this.ctx.stroke();
+
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.chartCursorIndex * this.cells.rx + 1, 0);
+      this.ctx.lineTo(this.chartCursorIndex * this.cells.rx + 1, this.canvas.nativeElement.height);
+      this.ctx.strokeStyle = "#ff0000";
+      this.ctx.stroke();
+    } else {
+      this.chartCursorIndex += 1;
+    }
 
     if (this.chartCursorIndex == this.maxLength - 1) {
       this.chartCursorIndex = 0;
       this.points = [];
     }
-
   }
 
   clearRegion() {
@@ -84,5 +89,9 @@ export class MedusaChartComponent implements OnInit {
     this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
   }
   
+  toggleDraw() {
+    this.updateEnabled = !this.updateEnabled;
+    this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+  }
 
 }

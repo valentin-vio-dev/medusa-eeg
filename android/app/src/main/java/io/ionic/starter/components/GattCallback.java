@@ -148,11 +148,11 @@ public class GattCallback extends BluetoothGattCallback {
             sum /= converted.length;
             end[0] = sum;
 
-            if (bytes[0] % 2 == 0) {
-
+            if (bytes[0] % 4 == 0) {
+                eegBridge.notifyEEGData(Utils.joinData(converted));
             }
 
-            eegBridge.notifyEEGData(Utils.joinData(converted));
+
 
             data.clearAll();
             battery = data.getBatteryValue(device, decrypted) == -1 ? battery : data.getBatteryValue(device, decrypted);
