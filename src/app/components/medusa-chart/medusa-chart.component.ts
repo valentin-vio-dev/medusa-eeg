@@ -11,6 +11,7 @@ export class MedusaChartComponent implements OnInit {
   @Input() height: number;
   @Input() isLive: any;
   @Input() maxLength: number;
+  @Input() label: string;
   ctx: CanvasRenderingContext2D;
   chartCursorIndex: number = 0;
   points: number[] = [];
@@ -48,7 +49,7 @@ export class MedusaChartComponent implements OnInit {
     
     this.ctx.lineTo(this.chartCursorIndex * this.cells.rx, this.point(p2));
     this.ctx.lineWidth = 1;
-    this.ctx.strokeStyle = "#000000";
+    this.ctx.strokeStyle = "#5f45cf";
     this.ctx.stroke();
 
     this.ctx.beginPath();
@@ -75,6 +76,12 @@ export class MedusaChartComponent implements OnInit {
     }
     avg /= this.points.length;
     return this.canvas.nativeElement.height - (p - avg)/5 - (this.canvas.nativeElement.height/2);
+  }
+
+  reset() {
+    this.chartCursorIndex = 0;
+    this.points = [];
+    this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
   }
   
 

@@ -19,17 +19,17 @@ export class HomePage implements OnInit, AfterViewInit {
   constructor(public actionSheetController: ActionSheetController, public deviceService: DeviceService) {}
 
   ngAfterViewInit(): void {
-
+    /*for (let i=0; i<this.charts['_results'].length; i++) {
+      this.addRandomPoints(this.charts['_results'][i]);
+    }*/
   }
 
   ngOnInit(): void {
-    //this.addRandomPoints();
     Plugins.EEGBridge.addListener('eeg_data', (res: any) => {
       let data = res['data'].split(',');
       for (let i=0; i<this.charts['_results'].length; i++) {
         this.addPoint(this.charts['_results'][i], parseFloat(data[i]))
       }
-      
     });
   }
 

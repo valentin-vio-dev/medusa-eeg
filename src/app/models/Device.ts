@@ -37,7 +37,15 @@ export default class Device {
         if (this.eegDataListener != null) {
             this.removeEEGDataListener();
         }
-        return Plugins.EEGBridge.disconnect({device_address: this.address});
+        return new Promise(async (resolve, reject) => {
+            await Plugins.EEGBridge.disconnect({device_address: this.address}).then(() => {
+                this.connected = false;
+                resolve();
+            }).catch((err) => {
+                this.connected = false;
+                reject(err);
+            });
+        });
     }
 
     async addEEGDataListener(firestore: AngularFirestore) {

@@ -88,7 +88,7 @@ public class GattCallback extends BluetoothGattCallback {
                 @Override
                 public void run() {
                     characteristics.add(gatt.getService(device.getUUIDDevice()).getCharacteristic(device.getUUIDEeg()));
-                    characteristics.add(gatt.getService(device.getUUIDDevice()).getCharacteristic(device.getUUIDGyro()));
+                    //characteristics.add(gatt.getService(device.getUUIDDevice()).getCharacteristic(device.getUUIDGyro()));
                     enableCharacteristicNotifications(gatt);
                 }
             }, DATA_STREAM_DELAY);

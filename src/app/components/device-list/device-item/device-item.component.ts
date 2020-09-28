@@ -25,7 +25,11 @@ export class DeviceItemComponent implements OnInit {
         this.connectionFailed(err);
       });
     } else {
-      this.device.disconnect();
+      this.device.disconnect().then(() => {
+        
+      }).catch((err) => {
+        this.connectionFailed(err);
+      });
     }
     
   }
