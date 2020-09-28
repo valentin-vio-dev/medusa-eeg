@@ -46,4 +46,8 @@ public class Utils {
         return Arrays.toString(data).replace("[", "").replace("]", "").replaceAll(", ", ",");
     }
 
+    public static String joinData(long[] data) {
+        return Arrays.toString(data).replace("[", "").replace("]", "").replaceAll(", ", ",");
+    }
+
 }
