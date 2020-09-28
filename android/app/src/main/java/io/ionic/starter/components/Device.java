@@ -32,9 +32,11 @@ public abstract class Device {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public void disconnect() {
-        bluetoothGatt.close();
-        bluetoothGatt.disconnect();
-        bluetoothGatt = null;
+        if (bluetoothGatt != null) {
+            bluetoothGatt.close();
+            bluetoothGatt.disconnect();
+            bluetoothGatt = null;
+        }
     }
 
     public static Device create(BluetoothDevice bluetoothDevice) {

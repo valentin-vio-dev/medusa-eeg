@@ -6,8 +6,13 @@ import Record from 'src/app/models/Record';
   providedIn: 'root'
 })
 export class RecordService {
+  signals: any[] = [];
 
   constructor() { }
+
+  addSignals(data: any[]) {
+    this.signals.push(data);
+  }
 
   
 }

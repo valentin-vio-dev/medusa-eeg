@@ -3,6 +3,7 @@ import Record from './Record';
 import Signal from './Signal';
 
 import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
+import { RecordService } from '../services/record-service/record.service';
 
 export default class Device {
     name: string;
@@ -40,7 +41,7 @@ export default class Device {
     }
 
     async addEEGDataListener(firestore: AngularFirestore) {
-        this.firestoreDocRef = await firestore.collection('records').add({
+        /*this.firestoreDocRef = await firestore.collection('records').add({
             device: { 
                 name: this.name,
                 address: this.address
@@ -52,7 +53,7 @@ export default class Device {
                 time: Date.now(),
                 data: this.arrayFromString(res.data)
             });
-        });
+        });*/
     }
 
     removeEEGDataListener() {

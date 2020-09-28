@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { DeviceListComponent } from '../components/device-list/device-list.component';
 import { DeviceItemComponent } from '../components/device-list/device-item/device-item.component';
+import { MedusaChartComponent } from '../components/medusa-chart/medusa-chart.component';
 
 
 @NgModule({
@@ -16,6 +17,6 @@ import { DeviceItemComponent } from '../components/device-list/device-item/devic
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, DeviceListComponent, DeviceItemComponent]
+  declarations: [HomePage, DeviceListComponent, DeviceItemComponent, MedusaChartComponent]
 })
 export class HomePageModule {}

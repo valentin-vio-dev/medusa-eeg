@@ -42,4 +42,8 @@ public class Utils {
         return Arrays.toString(Data.byteArrayToUnsignedSM(bytes)).replace("[", "").replace("]", "").replaceAll(", ", delimiter);
     }
 
+    public static String joinData(double[] data) {
+        return Arrays.toString(data).replace("[", "").replace("]", "").replaceAll(", ", ",");
+    }
+
 }

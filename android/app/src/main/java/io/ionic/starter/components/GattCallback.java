@@ -127,7 +127,7 @@ public class GattCallback extends BluetoothGattCallback {
 
         byte[] bytes = characteristic.getValue();
 
-        eegBridge.notifyEEGData(Utils.joinBytes(bytes, ","));
+        //eegBridge.notifyEEGData(Utils.joinBytes(bytes, ","));
 
         if (Data.isGyroData(bytes)) {
             Utils.error(Arrays.toString(Data.byteArrayToUnsignedSM(bytes)));
@@ -138,6 +138,22 @@ public class GattCallback extends BluetoothGattCallback {
         data.addBytes(bytes);
         if (data.allPacketsArrived()) {
             long[] decrypted = data.getPreparedData(device);
+            double[] converted = device.convertEEG(decrypted);
+
+            double[] end = new double[1];
+            double sum = 0;
+            for (int i=0; i<14; i++) {
+                sum += converted[i];
+            }
+            sum /= converted.length;
+            end[0] = sum;
+
+            if (bytes[0] % 2 == 0) {
+
+            }
+
+            eegBridge.notifyEEGData(Utils.joinData(converted));
+
             data.clearAll();
             battery = data.getBatteryValue(device, decrypted) == -1 ? battery : data.getBatteryValue(device, decrypted);
 

@@ -59,4 +59,10 @@ public class EEGBridge extends Plugin {
         ret.put("data", data);
         notifyListeners("eeg_data", ret);
     }
+
+    public void notifyEEGData(double data) {
+        JSObject ret = new JSObject();
+        ret.put("data", data);
+        notifyListeners("eeg_data", ret);
+    }
 }

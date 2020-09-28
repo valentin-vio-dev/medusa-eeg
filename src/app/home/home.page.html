@@ -8,6 +8,20 @@
 
 <ion-content class="ion-padding">
   <app-device-list [scanning]="scanning"></app-device-list>
+  <div *ngFor="let channel of channels">
+    <ion-text>
+      <small>{{ channel }}</small>
+    </ion-text>
+    <app-medusa-chart
+      [width]="300"
+      [height]="50"
+      [isLive]="true"
+      [maxLength]="127"
+      #chart
+      id="{{ channel }}"></app-medusa-chart>
+      <br>
+
+  </div>
 </ion-content>
 
 <ion-footer class="ion-no-border ion-padding">

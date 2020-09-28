@@ -28,7 +28,6 @@ public class DevicesHandler {
     public boolean addDevice(Device device) {
         if (containsDevice(device)) return false;
         devices.add(device);
-        Utils.error(device.getName() + " ---------------------");
         eegBridge.notifyScannedDevices(device);
         return true;
     }
