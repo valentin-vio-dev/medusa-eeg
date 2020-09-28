@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import Device from 'src/app/models/Device';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { firestore } from 'firebase';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-device-item',
@@ -13,16 +14,34 @@ import { firestore } from 'firebase';
 export class DeviceItemComponent implements OnInit {
   @Input() device: Device;
 
-  constructor(public alertController: AlertController, private fireStore: AngularFirestore) { }
+  constructor(public alertController: AlertController, private router: Router) { }
 
   ngOnInit() {}
 
   connect() {
     if (!this.device.connected) {
       this.device.connect().then(() => {
-        this.device.addEEGDataListener(this.fireStore);
+        let extras: NavigationExtras = {
+          queryParams: {
+            deviceName: this.device.name,
+            deviceAddress: this.device.address
+          }
+        };
+        this.router.navigate(['/connected-device'], extras);
       }).catch((err) => {
-        this.connectionFailed(err);
+        //this.connectionFailed(err);
+        let extras: NavigationExtras = {
+          queryParams: {
+            deviceName: this.device.name,
+            deviceAddress: this.device.address
+          }
+        };
+        this.router.navigate(['/connected-device'], extras).then(() => {
+          /*let audio = new Audio();
+          audio.src = 'assets/sounds/connected.wav';
+          audio.load();
+          audio.play();*/
+        });
       });
     } else {
       this.device.disconnect().then(() => {

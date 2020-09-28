@@ -7,20 +7,28 @@ import { Subscription } from 'rxjs';
   providedIn: 'root'
 })
 export class DeviceService {
-  devices: Device[] = [];
+  devices: Device[] = [new Device("EPOC+ (4F32H47)", "B3:6F:C2:L1")];
   scannerListener: any;
 
-  constructor() { }
+  constructor() {
+    
+  }
 
   scan(time: number) {
     this.clearDevices();
 
-    this.scannerListener = Plugins.EEGBridge.addListener('device_scan_result', (result: any) => {
-      this.devices.push(new Device(result.name, result.address));
-    });
+    
 
     Plugins.EEGBridge.scan({time}).then(() => {
-      this.scannerListener.remove();
+      setTimeout(() => {
+        if (this.scannerListener) {
+          this.scannerListener.remove();
+        }
+      }, time + 100);
+
+      this.scannerListener = Plugins.EEGBridge.addListener('device_scan_result', (result: any) => {
+        this.devices.push(new Device(result.name, result.address));
+      });
     }).catch(() => {
       console.log('EEGBridge error');
     });
@@ -28,6 +36,24 @@ export class DeviceService {
 
   clearDevices() {
     this.devices = [];
+  }
+
+  hasConnectedDevice() {
+    this.devices.forEach(device => {
+      if (device.connected) {
+        return true;
+      }
+    });
+    return false;
+  }
+
+  getDeviceByAddress(address: string) {
+    let ret = null;
+    this.devices.some(device => {
+      ret = device;
+      return device.address === address;
+    });
+    return ret;
   }
 
 }

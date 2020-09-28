@@ -1,0 +1,63 @@
+ion-title {
+    margin-left: -20px;
+}
+
+.headset-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 60%; 
+        //filter: drop-shadow(0px 75px 25px rgba(0, 0, 0, 0.3));
+    }
+}
+
+ion-item {
+    &.device {
+        margin-bottom: 15px;
+        border-radius: 10px;
+        padding: 10px 0px;
+        background-color: #7d5fff;
+        box-shadow: 0px 7px 0px 0px #5f45cf;
+    }
+}
+
+.status-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .status-back {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-left: 10px;
+        width: 25px;
+        height: 25px;
+        border-radius: 20px;
+        background-color: #5f45cf;
+        .status-indicator {
+            width: 15px;
+            height: 15px;
+            background-color: #6cff5f;
+            border-radius: 20px;
+        }
+    }
+}
+
+.flow-up {
+    animation: flow-up-anim 1000ms;
+}
+
+@keyframes flow-up-anim {
+    from {
+        margin-top: 50px;
+        opacity: 0;
+    }
+    to {
+        margin-top: 0px;
+        opacity: 1;
+    }
+}

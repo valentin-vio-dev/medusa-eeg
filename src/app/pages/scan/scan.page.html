@@ -4,30 +4,17 @@
       <b class="primary-text">SCAN</b><b>DEVICES</b>
     </ion-title>
   </ion-toolbar>
+  <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <app-device-list [scanning]="scanning"></app-device-list>
-  <!--<div *ngFor="let channel of channels">
-    <ion-text>
-      <small>{{ channel }}</small>
-    </ion-text>
-    <app-medusa-chart
-      [width]="300"
-      [height]="50"
-      [isLive]="true"
-      [maxLength]="127"
-      [label]="channel"
-      #chart
-      id="{{ channel }}"></app-medusa-chart>
-      <br>
-
-  </div>-->
+  
 </ion-content>
 
 <ion-footer class="ion-no-border ion-padding">
   <ion-toolbar>
-    <ion-button slot="secondary" class="dark" (click)="scanTimeSettings()">
+    <ion-button slot="secondary" [class]="scanning ? 'disabled' : 'dark'" (click)="scanTimeSettings()">
       <ion-icon name="settings"></ion-icon>
     </ion-button>
     <ion-button expand="block" (click)="scan()" [class]="scanning ? 'disabled' : ''">

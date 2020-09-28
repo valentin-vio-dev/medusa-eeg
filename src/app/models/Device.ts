@@ -37,6 +37,7 @@ export default class Device {
         if (this.eegDataListener != null) {
             this.removeEEGDataListener();
         }
+        
         return new Promise(async (resolve, reject) => {
             await Plugins.EEGBridge.disconnect({device_address: this.address}).then(() => {
                 this.connected = false;

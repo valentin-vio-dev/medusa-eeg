@@ -1,0 +1,16 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="scan">
+      <ion-icon name="wifi"></ion-icon>
+      <ion-badge>{{ deviceService.devices.length }}</ion-badge>
+    </ion-tab-button>
+
+    <ion-tab-button tab="cloud">
+      <ion-icon name="cloud"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="settings">
+      <ion-icon name="settings"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

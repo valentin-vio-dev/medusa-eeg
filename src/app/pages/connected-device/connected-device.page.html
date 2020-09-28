@@ -1,0 +1,31 @@
+<ion-header [translucent]="true" class="ion-no-border" >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="toScanPage()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <b class="primary-text">CONNECTED</b><b>DEVICE</b>
+    </ion-title>
+  </ion-toolbar>
+  <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item lines="none" class="device" color="primary">
+    <ion-label>
+      <b>{{ device.name }}</b> <br>
+      <small>{{ device.address }}</small>
+    </ion-label>
+    <div class="status-container">
+      <small>Connected</small>
+      <div class="status-back">
+        <div class="status-indicator"></div>
+      </div>
+    </div>
+  </ion-item>
+  <div class="headset-container">
+    <img src="../../../assets/img/epoc_headset.png" alt="">
+  </div>
+</ion-content>
