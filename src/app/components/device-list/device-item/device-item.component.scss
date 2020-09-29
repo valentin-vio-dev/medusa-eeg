@@ -6,14 +6,17 @@ ion-item {
     padding: 10px 0px;
     background-color: #7d5fff;
     box-shadow: 0px 7px 0px 0px #5f45cf;
+    overflow: visible;
 
     &.connected {
         border: 3px solid #92ff5f;
     }
 
     img {
+        
         width: 65px;
-        background-color: #5f45cf;
+        //background-color: #5f45cf;
         border-radius: 10px;
+        filter: drop-shadow(0px 15px 5px rgba(0, 0, 0, 0.5));
     }
 }

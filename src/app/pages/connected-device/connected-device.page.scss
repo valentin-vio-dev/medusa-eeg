@@ -39,10 +39,11 @@ ion-item {
         border-radius: 20px;
         background-color: #5f45cf;
         .status-indicator {
-            width: 15px;
+            width: 5px;
             height: 15px;
-            background-color: #6cff5f;
+            background-color: #beffb8;
             border-radius: 20px;
+            box-shadow: 0px 0px 5px 3px #6cff5f;
         }
     }
 }
