@@ -17,7 +17,7 @@
     <ion-button slot="secondary" [class]="scanning ? 'disabled' : 'dark'" (click)="scanTimeSettings()">
       <ion-icon name="settings"></ion-icon>
     </ion-button>
-    <ion-button expand="block" (click)="scan()" [class]="scanning ? 'disabled' : ''">
+    <ion-button expand="block" (click)="scan()" [class]="scanning ? 'disabled' : 'secondary'">
       {{ scanning ? 'Scanning...' : 'Scan' }}
     </ion-button>
   </ion-toolbar>

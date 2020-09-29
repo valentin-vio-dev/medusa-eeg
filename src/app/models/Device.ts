@@ -9,6 +9,7 @@ export default class Device {
     name: string;
     address: string;
     connected: boolean;
+    battery: number;
 
     eegDataListener: any;
     firestore: AngularFirestore;

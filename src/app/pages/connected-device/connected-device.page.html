@@ -18,14 +18,59 @@
       <b>{{ device.name }}</b> <br>
       <small>{{ device.address }}</small>
     </ion-label>
-    <div class="status-container">
-      <small>Connected</small>
-      <div class="status-back">
-        <div class="status-indicator"></div>
-      </div>
+    <div class="right">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-icon name="battery-full"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <small>- %</small>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
   </ion-item>
   <div class="headset-container">
     <img src="../../../assets/img/epoc_headset.png" alt="">
   </div>
+  <ion-item lines="none" color="primary" class="block mb">
+    <ion-icon name="analytics-outline" class="mr"></ion-icon>
+    <ion-label>Sample rate</ion-label>
+    <ion-select value="notifications" interface="action-sheet">
+      <ion-select-option value="128">128 hz</ion-select-option>
+      <ion-select-option value="64">64 hz</ion-select-option>
+      <ion-select-option value="32">32 hz</ion-select-option>
+      <ion-select-option value="16">16 hz</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item lines="none" color="primary" class="block mb">
+    <ion-icon name="stats-chart" class="mr"></ion-icon>
+    <ion-label>Max data length</ion-label>
+    <ion-select value="notifications" interface="action-sheet">
+      <ion-select-option value="128">128 sample</ion-select-option>
+      <ion-select-option value="64">64 sample</ion-select-option>
+      <ion-select-option value="32">32 sample</ion-select-option>
+      <ion-select-option value="16">16 sample</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <div class="panel">
+    <ion-item lines="none">
+      <ion-icon name="cloud" class="mr"></ion-icon>
+      <ion-label>Save to Cloud</ion-label>
+      <ion-checkbox color="primary" (ionChange)="checkboxChange($event)"></ion-checkbox>
+    </ion-item>
+    <div *ngIf="cloudSave">mqweqwrqw</div>
+  </div>
 </ion-content>
+
+<ion-footer class="ion-no-border ion-padding">
+  <ion-toolbar>
+    <ion-button expand="block" class="secondary">
+      <ion-icon name="play" class="mr"></ion-icon>
+      Start record
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

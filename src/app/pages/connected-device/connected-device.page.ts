@@ -11,6 +11,7 @@ import { DeviceService } from 'src/app/services/device-service/device.service';
 export class ConnectedDevicePage implements OnInit {
   loading: boolean;
   device: Device;
+  cloudSave: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private deviceSerice: DeviceService) {
    
@@ -27,6 +28,14 @@ export class ConnectedDevicePage implements OnInit {
 
   toScanPage() {
     this.router.navigate(['/']);
+  }
+
+  checkboxChange(event?) {
+    if (event.detail.checked) {
+      this.cloudSave = true;
+    } else {
+      this.cloudSave = false;
+    }
   }
 
 }
