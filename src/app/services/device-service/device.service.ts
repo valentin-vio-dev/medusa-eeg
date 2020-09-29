@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   providedIn: 'root'
 })
 export class DeviceService {
-  devices: Device[] = [new Device("EPOC+ (4F32H47)", "B3:6F:C2:L1")];
+  devices: Device[] = [new Device("EPOC+ (4F32H47)", "B3:6F:C2:L1"), new Device("EPOC+ (4F32H47)", "B3:6F:C2:L1"), new Device("EPOC+ (4F32H47)", "B3:6F:C2:L1") ];
   scannerListener: any;
 
   constructor() {
